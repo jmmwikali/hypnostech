@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
+import Loader from './Loader';
 
 const Signup = () => {
   // Initialize the hooks
@@ -10,7 +11,7 @@ const Signup = () => {
   const [phone, setPhone] = useState("")
 
   // Define the three states an application will move to
-  const [loading, setLoading] = useState("");
+  const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
 
@@ -20,7 +21,7 @@ const Signup = () => {
     e.preventDefault()
 
     // Update our loading hook with a message that will be displayed to the users who are trying to register
-    setLoading("Please wait as registration is in progress...")
+    setLoading(true)
 
     try{
       // Create  form data object that will enable you to capture the four details entered on the form
@@ -36,7 +37,7 @@ const Signup = () => {
       const response = await axios.post("https://jmmwikali.alwaysdata.net/api/signup",formdata)
 
       // Set back the loading to default
-      setLoading("");
+      setLoading(false);
 
       // Just incase everything goes on well, update the success Hook with a message
       setSuccess(response.data.message)
@@ -53,7 +54,7 @@ const Signup = () => {
     }
     catch(error){
       // Set the loading hook back to default
-      setLoading("")
+      setLoading(false)
 
       // Update the error hook with the message given back from the response
       setError(error.message)
@@ -61,11 +62,21 @@ const Signup = () => {
   }
 
   return (
-    <div className='row justify-content-center mt-4'>
-      <div className="col-md-6 card shadow p-4">
-        <h1 className='text-primary'>Sign Up</h1>
+    <div className='row justify-content-center mt-2 signup'>
+      <div className="col-md-6 card shadow px-4 pb-2" style={{ background: '#F5F7FA' }}>
+        <div className="logo">
+          <h1>
+            Hypn<span className="blur">o</span>s
+          </h1>
 
-        <h5 className="text-info">{loading}</h5>
+          <div className="tech-line">
+            <span>TECH</span>
+          </div>
+        </div>
+
+        <h3>Sign Up</h3>
+
+        {loading && <Loader text="Please wait while registration is in progress..."/> }
         <h3 className="text-success">{success}</h3>
         <h4 className="text-danger">{error}</h4>
 
@@ -106,9 +117,11 @@ const Signup = () => {
 
           {/* {phone} */}
 
-          <input type="submit" value="Signup" className='btn btn-primary w-100' /> <br /> <br />
+          <input type="submit" value="Signup" className='button w-100' /> <br /> <br />
 
           Already have an account? <Link to={'/signin'}>Signin</Link>
+
+          <p>I agree to Hypnos Tech Terms & Conditions and Privacy Policy</p>
 
         </form>
 

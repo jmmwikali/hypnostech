@@ -1,45 +1,316 @@
-.App {
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
+
+html, body, #root {
+  height: 100%;               
+  margin: 0;                  
+  background-color: #F5F7FA; 
+}
+
+
+.signup {
   text-align: center;
+  font-family: 'Inter', 'Poppins', 'Roboto', sans-serif;
+}
+.signin {
+  text-align: center;
+  font-family: 'Inter', 'Poppins', 'Roboto', sans-serif;
+}
+.product_img{
+  object-fit: cover;
+  width: 75%;
+  height: 200px;
+  display: block;
+  border-radius: 10px;
+  margin-right: 100px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.logo h1 {
+  font-size: 90px;
+  font-weight: 900;
+  margin: 0;
+  letter-spacing: 2px;
+  color: #0F52BA;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* Blur effect on O */
+.blur {
+  filter: blur(3px);
+  display: inline-block;
+  font-size: 120px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 10vh;
+/* TECH line */
+.tech-line {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-  font-family:Georgia, 'Times New Roman', Times, serif;
+  margin-top: 10px;
 }
 
-.App-link {
-  color: #61dafb;
+.tech-line::before,
+.tech-line::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #aaa;
+  margin: 0 10px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.tech-line span {
+  font-size: 14px;
+  letter-spacing: 4px;
+  color: #0f53baa8;
 }
 
-.product_img{
-  object-fit: contain;
-  width:100%;
+p{
+  color: #282c346d;
+}
+.button{
+  background-color: #0F52BA;
+  border: 0;
+  border-radius: 12px;
+  padding: 10px;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 25px;
+}
+
+.button:hover{
+  background-color: #0c4192;
+  box-shadow: rgb(88, 88, 88) 2px 2px 8px;
+}
+.link{
+  background-color: #0c4192;
+  border-radius: 20px;
+  padding: 7px;
+  color: #ffffff;
+  text-decoration: none;
+  margin-left: 800px;
+}
+.get {
+  font-family: 'Inter', 'Poppins', 'Roboto', sans-serif;
+}
+
+.burger {
+  width: 15px;              /* width of the burger */
+  height: 15px;             /* total height */
+  display: flex;
+  flex-direction: column;   /* stack lines vertically */
+  justify-content: space-between; /* even spacing */
+  cursor: pointer;
+  margin-top: 4px;
+}
+
+.burger span {
+  display: block;
+  height: 2px;              /* line thickness */
+  background-color: black;  /* line color */
+  border-radius: 2px;       /* rounded edges */
+}
+
+.navs {
+  text-decoration: none;
+  color: #4B5563;
+}
+
+.navs:hover {
+  text-decoration: underline;
+  color: #0c4192;
+}
+
+.pages {
+  text-decoration: none;
+  font-size: 30px;
+  color: #010b18;
+  font-weight: 400;
+}
+.pages.active {
+  display: block;
+  color: #056bfa;
+  font-weight: 700;
+  border-bottom: 4px solid #056bfa;
+}
+.pages.divider {
+  border-left: 1px solid #4B5563;
+  padding-left: 15px;
+}
+
+.search-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  border: 2px solid #3b7fff; /* border color */
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(59, 127, 255, 0.2); /* subtle shadow */
+  background-color: #ffffff; /* card background */
+  max-width: 980px;
+  margin: 0 auto; /* center horizontally */
+  font-family: 'Inter', sans-serif;
+  margin-top: 20px;
+}
+
+.search-card input {
+  border: none;
+  outline: none;
+  flex: 1;
+  font-size: 14px;
+  color: #6b7280; /* placeholder text color */
+}
+
+.search-card button {
+  background: linear-gradient(90deg, #3b7fff, #1c63ff);
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.search-card button:hover{
+  background: linear-gradient(90deg, #1767fc, #003ec2);
+}
+.welcome {
+  margin-top: 50px;
+  justify-content: center;
+  text-align: center;
+  background-color: #f1f4f8;
+  padding: 10px;
+}
+
+.info {
+  background-color: #ffffff;
+  border-radius: 15px;
+  height: 55px;
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  margin-left: 150px;
+  margin-right: 150px;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.info span:nth-child(1) {
+ border-right: 1px solid #6b7280;
+ padding-right: 50px;
+}
+.info span:nth-child(2) {
+ border-right: 1px solid #6b7280;
+ padding-right: 50px;
+ padding-left: 1px;
+}
+
+.top-deals {
+  background-color: #d3dae1;
+  padding: 20px;
+  color: #4B5563;
+  border-radius: 10px;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: #ffe5e5;
+  border-radius: 999px;
+  padding: 6px 14px;
+  margin-bottom: 10px;
+}
+
+.arrow {
+  color: #f87171;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 1.5;
+}
+
+.amount {
+  color: #e63946;
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.purchase {
+  background: linear-gradient(90deg, #174EA6, #1E6BD6);
+  color: #fff;
+  border-radius: 6px;
+  border: 0px;
+  padding: 6px;
+}
+
+.purchase:hover {
+  background: linear-gradient(90deg, #0F3D91, #0063EE);
+}
+
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  padding: 16px;
+}
+
+/* Individual card */
+.card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.card-img {
+  width: 75%;
   height: 200px;
+  object-fit: cover;
+  object-position: center;
+}
+.price-tag {
+  display: inline-block;
+  background: #EEF2FF; 
+  color: #1E3A8A; 
+  padding: 6px 12px;
+  border-radius: 12px; /* pill shape */
+  font-weight: 600;
+  font-size: 20px;
+}
+.footer {
+  background: #111827;
+  color: #D1D5DB;
+  padding: 20px;
+} 
+
+.add{
+  font-family: 'Inter', 'Poppins', 'Roboto', sans-serif;
+}
+
+.card-img2 {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 12px;
+}
+
+.heading{
+  font-size: 50px;
+  font-weight: 900;
+  color: #00142e;
+}
+.back-button {
+  background: linear-gradient(90deg, #174EA6, #1E6BD6);
+  color: #fff;
+  border-radius: 6px;
+  border: 0px;
+  padding: 6px;
+  width: 200px;
+}
+.back-button:hover {
+  background: linear-gradient(90deg, #0F3D91, #0063EE);
 }

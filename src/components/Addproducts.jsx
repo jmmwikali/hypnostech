@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
 import Loader from './Loader';
 import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Addproducts = () => {
+
+  const navigate = useNavigate()
 
   // Introduce the hooks
   const [product_name, setProductName] = useState("");
@@ -65,9 +68,26 @@ const Addproducts = () => {
   }
 
   return (
+    <div className='add'>
+
+      <div style={{ display: 'flex',justifyContent: 'space-between'}}>
+        <span className='fw-bold display-6 m-3' style={{ color: ' #1F2A37' }}>Hypnos Tech</span>
+        <div>
+          <Link className='btn btn-outline-primary me-2 mt-4' to={"/signup"} style={{ width: '100px' }} >Sign Up</Link>
+          <Link className='btn btn-primary me-2 mt-4' to={"/signin"} style={{ width: '100px' }} >Sign In</Link>
+        </div>
+      </div>
+
+      <div>
+            <input type="button"
+            className="back-button ms-5"
+            value="← Back"
+            onClick={() => navigate("/")} />
+        </div>
+
     <div className='row justify-content-center mt-5'>
-      <div className="col-md-6 p-4 card shadow">
-        <h3 className="text-primary">Welcome To Add a Device</h3> <br />
+      <div className="col-md-6 p-4 card shadow" style={{ background: '#F5F7FA' }}>
+        <center><h1 className="fw-bold "style={{color: '#0F52BA'}}>Add a Product</h1></center>
 
         {/* Bind the loading hook */}
         {loading && <Loader />}
@@ -77,7 +97,7 @@ const Addproducts = () => {
         <form onSubmit={handleSubmit}>
 
           <input type="text"
-          placeholder='Enter the device name'
+          placeholder='Enter the product name'
           className='form-control'
           required
           value={product_name}
@@ -86,7 +106,7 @@ const Addproducts = () => {
           {/* {product_name} */}
 
           <input type="text"
-          placeholder='Enter the device description'
+          placeholder='Enter the product description'
           className='form-control'
           required
           value={product_description}
@@ -95,7 +115,7 @@ const Addproducts = () => {
           {/* {product_description} */}
 
           <input type="number"
-          placeholder='Enter the price of the device'
+          placeholder='Enter the price of the product'
           className='form-control'
           required
           value={product_cost}
@@ -103,7 +123,7 @@ const Addproducts = () => {
 
           {/* {product_cost} */}
 
-          <label>Device Photo</label>
+          <label>Product Image</label>
           <input type="file"
           className='form-control'
           required
@@ -114,10 +134,11 @@ const Addproducts = () => {
 
           <input type="submit"
           value={"Add Device"}
-          className='btn btn-primary w-100' />
+          className='button w-100' />
         </form>
       </div>
       
+    </div>
     </div>
   )
 }

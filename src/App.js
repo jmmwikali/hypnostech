@@ -12,9 +12,6 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <header className="App-header">
-          <h2>Welcome to Hypnos Tech - Power Your World</h2>
-        </header>
         <Routes>
           <Route path='/' element={<Getproducts />} />
           <Route path='/signup' element={<Signup />} />
