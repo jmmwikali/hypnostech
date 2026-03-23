@@ -4,126 +4,113 @@ import { Link } from 'react-router-dom';
 import Loader from './Loader';
 
 const Signup = () => {
-  // Initialize the hooks
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [phone, setPhone] = useState("")
 
-  // Define the three states an application will move to
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
 
-  // Below is a function that will handle the submit action
   const handleSubmit = async(e) => {
-    // Below we prevent our site from reloading
     e.preventDefault()
-
-    // Update our loading hook with a message that will be displayed to the users who are trying to register
     setLoading(true)
-
     try{
-      // Create  form data object that will enable you to capture the four details entered on the form
       const formdata = new FormData();
-
-      // Insert the four details (username, email, password, phone) in terms of key - value pairs
       formdata.append("username", username);
       formdata.append("email", email);
       formdata.append("password", password);
       formdata.append("phone", phone);
-
-      // By use of axios, we can access the method post
-      const response = await axios.post("https://jmmwikali.alwaysdata.net/api/signup",formdata)
-
-      // Set back the loading to default
+      const response = await axios.post("https://jmmwikali.alwaysdata.net/api/signup", formdata)
       setLoading(false);
-
-      // Just incase everything goes on well, update the success Hook with a message
       setSuccess(response.data.message)
-
-      // Clear your Hooks
       setUsername("")
       setEmail("")
       setPassword("")
       setPhone("")
-
-      setTimeout(() => {
-        setSuccess("");
-      }, 5000);
+      setTimeout(() => { setSuccess(""); }, 5000);
     }
     catch(error){
-      // Set the loading hook back to default
       setLoading(false)
-
-      // Update the error hook with the message given back from the response
       setError(error.message)
     }
   }
 
   return (
-    <div className='row justify-content-center mt-2 signup'>
-      <div className="col-md-6 card shadow px-4 pb-2" style={{ background: '#F5F7FA' }}>
-        <div className="logo">
-          <h1>
-            Hypn<span className="blur">o</span>s
-          </h1>
+    <div className='signup'>
+      <div className="auth-wrapper">
 
-          <div className="tech-line">
-            <span>TECH</span>
+        {/* ── Left panel: branding ── */}
+        <div className="auth-left">
+          <div className="auth-left-inner">
+            <div className="auth-moon-icon">☽</div>
+            <div className="auth-logo">
+              <h1>Hypn<span className="blur">o</span>s</h1>
+              <div className="tech-line"><span>TECH</span></div>
+            </div>
+            <p className="auth-tagline">Rest smarter.<br />Sleep better.</p>
+            <p className="auth-desc">
+              Hypnos Tech is your gateway to premium sleep technology — from intelligent sleep trackers to smart comfort devices designed to help you recover, recharge, and wake up renewed.
+            </p>
+            <div className="auth-features">
+              <div className="auth-feature-item">
+                <span className="auth-feature-icon">☽</span>
+                <span>Sleep Tracking Devices</span>
+              </div>
+              <div className="auth-feature-item">
+                <span className="auth-feature-icon">✦</span>
+                <span>Smart Comfort Systems</span>
+              </div>
+              <div className="auth-feature-item">
+                <span className="auth-feature-icon">◎</span>
+                <span>Science-backed Sleep Aids</span>
+              </div>
+            </div>
           </div>
         </div>
 
-        <h3>Sign Up</h3>
+        {/* ── Right panel: form ── */}
+        <div className="auth-right">
+          <h3 className="auth-form-title">Create your account</h3>
+          <p className="auth-form-subtitle">Start your journey to better sleep</p>
 
-        {loading && <Loader text="Please wait while registration is in progress..."/> }
-        <h3 className="text-success">{success}</h3>
-        <h4 className="text-danger">{error}</h4>
+          {loading && <Loader text="Registering your account…" />}
+          <h3 className="text-success">{success}</h3>
+          <h4 className="text-danger">{error}</h4>
 
-        <form onSubmit={handleSubmit}>
-          <input type="text"
-          placeholder='Enter the username'
-          className='form-control'
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required /> <br />
+          <form onSubmit={handleSubmit}>
+            <div className="auth-field">
+              <label className="form-label">Username</label>
+              <input type="text" placeholder='Choose a username' className='form-control'
+                value={username} onChange={(e) => setUsername(e.target.value)} required />
+            </div>
+            <div className="auth-field">
+              <label className="form-label">Email address</label>
+              <input type="email" placeholder='you@example.com' className='form-control'
+                value={email} onChange={(e) => setEmail(e.target.value)} required />
+            </div>
+            <div className="auth-field">
+              <label className="form-label">Password</label>
+              <input type="password" placeholder='Create a password' className='form-control'
+                value={password} onChange={(e) => setPassword(e.target.value)} required />
+            </div>
+            <div className="auth-field">
+              <label className="form-label">Mobile number</label>
+              <input type="tel" placeholder='254XXXXXXX' className='form-control'
+                value={phone} onChange={(e) => setPhone(e.target.value)} required />
+            </div>
 
-          {/* {username} */}
+            <input type="submit" value="Sign Up" className='button w-100' />
 
-          <input type="email"
-          placeholder='Enter the email address'
-          className='form-control'
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required /> <br />
-
-          {/* {email} */}
-
-          <input type="password"
-          placeholder='Enter the password'
-          className='form-control'
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required/> <br />
-
-          {/* {password} */}
-
-          <input type="tel"
-          placeholder='Enter the Mobile Phone number'
-          className='form-control'
-          value={phone}
-          onChange={(e) => setPhone(e.target.value)}
-          required /> <br />
-
-          {/* {phone} */}
-
-          <input type="submit" value="Signup" className='button w-100' /> <br /> <br />
-
-          Already have an account? <Link to={'/signin'}>Signin</Link>
-
-          <p>I agree to Hypnos Tech Terms & Conditions and Privacy Policy</p>
-
-        </form>
+            <p className="auth-switch">
+              Already have an account? <Link to={'/signin'}>Sign in</Link>
+            </p>
+            <p className="auth-terms">
+              I agree to Hypnos Tech Terms &amp; Conditions and Privacy Policy
+            </p>
+          </form>
+        </div>
 
       </div>
     </div>
@@ -131,5 +118,3 @@ const Signup = () => {
 }
 
 export default Signup;
-
-// Research on Axios in ReactJs

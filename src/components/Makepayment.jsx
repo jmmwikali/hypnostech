@@ -4,106 +4,98 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import Loader from './Loader';
 
 const Makepayment = () => {
-    // Destructure the details passed from the GetProducts component
-    // The useLocation hook allows us to get/ destructure the properties passed from the previous component
     const {product} = useLocation().state || {}
 
-    // console.log("The details passed from getproducts are:", product)
-
-    // Below we specify the image base URL
     const img_url = "https://jmmwikali.alwaysdata.net/static/images/"
 
-    // Declare the navigate hook
     const navigate = useNavigate()
 
-    // Initialize hooks to manage the state of the applictaion
     const [number, setNumber] = useState("");
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState("");
     const [error, setError] = useState("");
 
-    // Create a function that will handle the submit action
     const handleSubmit = async (e) => {
-        // Prevent the site from reloading
         e.preventDefault();
-        // Update the loading hook
         setLoading(true);
 
         try{
-            // Create a formdata object
-            const formdata =new FormData()
-            
-            // Append the form to the FormData
+            const formdata = new FormData()
             formdata.append("phone", number)
             formdata.append("amount", product.product_cost)
 
             const response = await axios.post("https://kbenkamotho.alwaysdata.net/api/mpesa_payment", formdata)
 
-            // Set loading back to default
             setLoading(false);
-
-            // Update the succes hook with the message
             setSuccess(response.data.message);
         }
         catch(error){
-            // If there is an error, respond to the error
             setLoading(false);
-
-            // Update the error hook with the error message
             setError(error.message);
         }
     }
 
-
   return (
-    <div className='row justify-content-center'>
-        {/* <button className="btn btn-primary">← Back to Products</button> */}
+    <div style={{ minHeight: '100vh', paddingBottom: '40px' }}>
 
-        <center><h1 className="heading">Make Payment - Lipa na M-Pesa</h1></center>
+      {/* ── Page heading ── */}
+      <div style={{ textAlign: 'center', paddingTop: '32px', marginBottom: '8px' }}>
+        <span style={{ fontSize: '2.2rem', color: '#C9A84C' }}>☽</span>
+        <h1 className="heading" style={{ marginTop: '4px' }}>Lipa na M-Pesa</h1>
+        <p style={{ color: 'rgba(184,196,232,0.6)', fontSize: '0.9rem', fontStyle: 'italic' }}>
+          Secure checkout for your sleep device
+        </p>
+      </div>
 
-          <div className="col-md-1">
-            <input type="button"
-            className="back-button w-100"
-            value="← Back"
-            onClick={() => navigate("/")} />
-        </div>
+      {/* ── Back button ── */}
+      <div style={{ padding: '0 28px 16px' }}>
+        <input type="button"
+          className="back-button"
+          value="← Back"
+          onClick={() => navigate("/")} />
+      </div>
 
-        <div className="col-md-6 card shadow p-4 mt-4">
-            <img 
-            src={img_url + product.product_photo} 
-            alt="Product Photo" 
+      {/* ── Product + Payment card ── */}
+      <div className="row justify-content-center">
+        <div className="col-md-6 card shadow p-4 mt-2">
+
+          <img
+            src={img_url + product.product_photo}
+            alt="Product Photo"
             className='card-img2' />
 
-            <div className="card-body">
-                <h2 className="text-primary"> {product.product_name} </h2>
+          <div className="card-body" style={{ padding: '16px 0 0' }}>
+            <h2 className="text-primary" style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontWeight: 400 }}>
+              {product.product_name}
+            </h2>
 
-                <p className='text-dark'> {product.product_description} </p>
+            <p style={{ fontSize: '0.9rem', lineHeight: '1.6' }}>{product.product_description}</p>
 
-                <b className="price-tag"><h3>KES {product.product_cost} </h3></b> <br /> 
-
-                <form onSubmit={handleSubmit}>
-
-                    {/* Bind the loading hook */}
-                    {loading && <Loader />}
-                    <h3 className="text-success">{success}</h3>
-                    <h4 className="text-danger">{error}</h4>
-
-                    <input type="tel"
-                    className='form-control'
-                    placeholder='Enter your phone number 254XXXXXXX'
-                    required
-                    value={number}
-                    onChange={(e) => setNumber(e.target.value)} /> <br />
-
-                    {/* {number} */}
-
-                    <input type="submit"
-                    value={"Make Payment"}
-                    className='purchase w-100' />
-                </form>
+            <div className="price-tag" style={{ fontSize: '1.1rem', marginBottom: '20px' }}>
+              KES {product.product_cost}
             </div>
+
+            <form onSubmit={handleSubmit}>
+              {loading && <Loader />}
+              <h3 className="text-success">{success}</h3>
+              <h4 className="text-danger">{error}</h4>
+
+              <input type="tel"
+                className='form-control'
+                placeholder='Phone number: 254XXXXXXX'
+                required
+                value={number}
+                onChange={(e) => setNumber(e.target.value)} />
+              <br />
+
+              <input type="submit"
+                value="Complete Payment"
+                className='purchase w-100'
+                style={{ fontSize: '1rem', padding: '12px' }} />
+            </form>
+          </div>
         </div>
-        
+      </div>
     </div>
   )
 }
