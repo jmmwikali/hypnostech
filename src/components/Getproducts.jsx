@@ -79,7 +79,7 @@ const Getproducts = () => {
       </div>
 
       <div className="search-card">
-        <input type="text" placeholder='Search for an item' />
+        <input type="text" placeholder='Search for a product' />
         
         <button><span><img src="/images/search.png" alt="" width="20px" /></span> Search</button>
       </div>
@@ -99,7 +99,7 @@ const Getproducts = () => {
 
       {/* Map the products fetched from the api to the user interface */}
 
-      <div className='top-deals row mx-3 ms-5'>
+      <div className='top-deals row mx-3'>
         <h3>Top Deals</h3>
         <p>Score the lowest prices on Hypnos Tech</p> <br />
 
@@ -144,7 +144,7 @@ const Getproducts = () => {
           className='card-img' />
           </div>
 
-          <div className="card-body">
+          <div className="card-bod">
             <h5 className="text-primary">{product.product_name}</h5>
 
             <p className="text-dark">{product.product_description.slice(0,100)}...</p>
@@ -152,11 +152,12 @@ const Getproducts = () => {
             <h4 className="price-tag">KES {product.product_cost} </h4>
 
             <button className="purchase w-100" onClick={() => navigate("/makepayment", {state : {product}})}>Purchase Now</button>
+            <button className="w-50 edit-button mt-1" onClick={() => navigate("/editproduct", {state : {product}})}>Edit Product</button>
           </div>
         </div>
         
       ) )}
-      </div>
+      </div> <br />
 
       <div className='row footer'>
         <div className="col-md-6">

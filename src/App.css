@@ -241,6 +241,7 @@ p{
   border-radius: 6px;
   border: 0px;
   padding: 6px;
+  margin-top: auto;
 }
 
 .purchase:hover {
@@ -251,10 +252,9 @@ p{
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
-  padding: 16px;
+  align-items: stretch;
 }
 
-/* Individual card */
 .card {
   background: #ffffff;
   border: 1px solid #e5e7eb;
@@ -262,7 +262,14 @@ p{
   padding: 16px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  height: 100%; /* makes all cards equal height */
+}
+
+.card-bod {
+  display: flex;
+  flex-direction: column;
+  flex: 1; /* stretches to fill remaining card space */
+  
 }
 
 .card-img {
@@ -313,4 +320,18 @@ p{
 }
 .back-button:hover {
   background: linear-gradient(90deg, #0F3D91, #0063EE);
+}
+.edit {
+  font-family: 'Inter', 'Poppins', 'Roboto', sans-serif;
+}
+.edit-button{
+  border: 1px solid #0F52BA;
+  border-radius: 12px;
+  padding: 5px;
+  color:#00142e;
+  }
+
+.edit-button:hover{
+  background-color: #0c4292bc;
+  color: #fff;
 }

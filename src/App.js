@@ -7,6 +7,7 @@ import Addproducts from './components/Addproducts';
 import Getproducts from './components/Getproducts';
 import Makepayment from './components/Makepayment';
 import Notfound from './components/Notfound';
+import EditProduct from './components/EditProduct';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path='/signin' element={<Signin />} />
           <Route path='/addproducts' element={<Addproducts />} />
           <Route path='/makepayment' element={<Makepayment />} />
+          <Route path='/editproduct' element={<EditProduct />} />
           <Route path='*' element={<Notfound />} />
         </Routes>
 
