@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Loader from './Loader';
 
@@ -7,41 +7,37 @@ const Signup = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [phone, setPhone] = useState("")
+  const [phone, setPhone] = useState("");
 
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
 
-  const handleSubmit = async(e) => {
-    e.preventDefault()
-    setLoading(true)
-    try{
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
       const formdata = new FormData();
       formdata.append("username", username);
       formdata.append("email", email);
       formdata.append("password", password);
       formdata.append("phone", phone);
-      const response = await axios.post("https://jmmwikali.alwaysdata.net/api/signup", formdata)
+      const response = await axios.post("https://jmmwikali.alwaysdata.net/api/signup", formdata);
       setLoading(false);
-      setSuccess(response.data.message)
-      setUsername("")
-      setEmail("")
-      setPassword("")
-      setPhone("")
-      setTimeout(() => { setSuccess(""); }, 5000);
+      setSuccess(response.data.message);
+      setUsername(""); setEmail(""); setPassword(""); setPhone("");
+      setTimeout(() => setSuccess(""), 5000);
+    } catch (err) {
+      setLoading(false);
+      setError(err.message);
     }
-    catch(error){
-      setLoading(false)
-      setError(error.message)
-    }
-  }
+  };
 
   return (
     <div className='signup'>
       <div className="auth-wrapper">
 
-        {/* ── Left panel: branding ── */}
+        {/* ── Left panel ── */}
         <div className="auth-left">
           <div className="auth-left-inner">
             <div className="auth-moon-icon">☽</div>
@@ -54,23 +50,14 @@ const Signup = () => {
               Hypnos Tech is your gateway to premium sleep technology — from intelligent sleep trackers to smart comfort devices designed to help you recover, recharge, and wake up renewed.
             </p>
             <div className="auth-features">
-              <div className="auth-feature-item">
-                <span className="auth-feature-icon">☽</span>
-                <span>Sleep Tracking Devices</span>
-              </div>
-              <div className="auth-feature-item">
-                <span className="auth-feature-icon">✦</span>
-                <span>Smart Comfort Systems</span>
-              </div>
-              <div className="auth-feature-item">
-                <span className="auth-feature-icon">◎</span>
-                <span>Science-backed Sleep Aids</span>
-              </div>
+              <div className="auth-feature-item"><span className="auth-feature-icon">☽</span><span>Sleep Tracking Devices</span></div>
+              <div className="auth-feature-item"><span className="auth-feature-icon">✦</span><span>Smart Comfort Systems</span></div>
+              <div className="auth-feature-item"><span className="auth-feature-icon">◎</span><span>Science-backed Sleep Aids</span></div>
             </div>
           </div>
         </div>
 
-        {/* ── Right panel: form ── */}
+        {/* ── Right panel ── */}
         <div className="auth-right">
           <h3 className="auth-form-title">Create your account</h3>
           <p className="auth-form-subtitle">Start your journey to better sleep</p>
@@ -100,21 +87,17 @@ const Signup = () => {
               <input type="tel" placeholder='254XXXXXXX' className='form-control'
                 value={phone} onChange={(e) => setPhone(e.target.value)} required />
             </div>
-
             <input type="submit" value="Sign Up" className='button w-100' />
-
             <p className="auth-switch">
               Already have an account? <Link to={'/signin'}>Sign in</Link>
             </p>
-            <p className="auth-terms">
-              I agree to Hypnos Tech Terms &amp; Conditions and Privacy Policy
-            </p>
+            <p className="auth-terms">I agree to Hypnos Tech Terms &amp; Conditions and Privacy Policy</p>
           </form>
         </div>
 
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Signup;

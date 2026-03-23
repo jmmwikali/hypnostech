@@ -732,3 +732,260 @@ footer.text-white {
 .text-danger   { color: var(--danger) !important; }
 .text-dark     { color: var(--moonbeam) !important; }
 .text-muted    { color: rgba(184, 196, 232, 0.5) !important; }
+
+/* ═══════════════════════════════════════════════════════════
+   CART
+═══════════════════════════════════════════════════════════ */
+
+/* Cart badge on "View Cart" tab */
+.cart-badge {
+  position: absolute;
+  top: -8px;
+  right: -14px;
+  background: var(--accent-moon);
+  color: var(--night);
+  font-size: 0.65rem;
+  font-weight: 800;
+  font-family: var(--font-body);
+  border-radius: 999px;
+  padding: 2px 6px;
+  min-width: 18px;
+  text-align: center;
+  line-height: 1.4;
+}
+
+/* "Add to Cart" button on product cards */
+.card-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.cart-button {
+  background: transparent;
+  border: 1.5px solid var(--accent-moon);
+  border-radius: var(--radius-sm);
+  padding: 6px 10px;
+  color: var(--accent-moon);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cart-button:hover {
+  background: rgba(201, 168, 76, 0.15);
+  color: #e8c86a;
+}
+
+.cart-button--added {
+  background: rgba(46, 204, 142, 0.18);
+  border-color: var(--success);
+  color: var(--success);
+}
+
+/* ── Cart page layout ── */
+.cart-page {
+  font-family: var(--font-body);
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+}
+
+.cart-layout {
+  display: flex;
+  gap: 28px;
+  max-width: 1200px;
+  margin: 24px auto 60px;
+  padding: 0 24px;
+  align-items: flex-start;
+}
+
+/* Left: item list */
+.cart-items {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.cart-empty {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--moonbeam);
+}
+
+.cart-item-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.cart-item-card:hover {
+  border-color: rgba(139, 163, 217, 0.5);
+  box-shadow: var(--shadow-glow);
+}
+
+.cart-item-img {
+  width: 110px;
+  height: 110px;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  flex-shrink: 0;
+  border: 1px solid rgba(139, 163, 217, 0.2);
+}
+
+.cart-item-details {
+  flex: 1;
+}
+
+.cart-item-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  min-width: 120px;
+}
+
+/* Quantity stepper */
+.qty-stepper {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  border: 1.5px solid rgba(139, 163, 217, 0.3);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.qty-btn {
+  background: rgba(255,255,255,0.07);
+  border: none;
+  color: var(--starlight);
+  font-size: 1.1rem;
+  font-weight: 700;
+  width: 34px;
+  height: 34px;
+  cursor: pointer;
+  transition: background 0.15s;
+  font-family: var(--font-body);
+}
+
+.qty-btn:hover {
+  background: rgba(74, 107, 214, 0.25);
+}
+
+.qty-value {
+  min-width: 36px;
+  text-align: center;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--starlight);
+  font-family: var(--font-body);
+}
+
+.cart-remove-btn {
+  background: transparent;
+  border: none;
+  color: var(--danger);
+  font-size: 0.78rem;
+  font-family: var(--font-body);
+  cursor: pointer;
+  padding: 4px 0;
+  margin-top: 4px;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+
+.cart-remove-btn:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+/* Right: order summary */
+.cart-summary {
+  width: 300px;
+  flex-shrink: 0;
+  background: var(--card-bg-form);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  position: sticky;
+  top: 80px;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.92rem;
+  color: var(--moonbeam);
+  margin-bottom: 10px;
+  font-family: var(--font-body);
+}
+
+.summary-divider {
+  height: 1px;
+  background: rgba(139, 163, 217, 0.2);
+  margin: 12px 0;
+}
+
+.summary-total {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--starlight);
+}
+
+/* Responsive cart */
+@media (max-width: 768px) {
+  .cart-layout {
+    flex-direction: column;
+  }
+  .cart-summary {
+    width: 100%;
+    position: static;
+  }
+  .cart-item-card {
+    flex-wrap: wrap;
+  }
+  .cart-item-controls {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    min-width: unset;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   RBAC — Role badges & admin indicators
+═══════════════════════════════════════════════════════════ */
+
+.role-badge {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  margin-left: 12px;
+  vertical-align: middle;
+}
+
+.role-badge--admin {
+  background: rgba(201, 168, 76, 0.18);
+  border: 1px solid rgba(201, 168, 76, 0.5);
+  color: var(--accent-moon);
+}
+
+.role-badge--customer {
+  background: rgba(74, 107, 214, 0.15);
+  border: 1px solid rgba(74, 107, 214, 0.35);
+  color: var(--lavender);
+}
