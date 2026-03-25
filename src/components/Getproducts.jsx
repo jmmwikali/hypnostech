@@ -229,7 +229,7 @@ const Getproducts = () => {
         </div>
       </div>
 
-      {loading && <Loader text="Fetching your sleep devices…" />}
+      {loading && <Loader text="Loading sleep devices…" />}
       <h4 className="text-danger ms-3">{error}</h4>
 
       <br />

@@ -1,22 +1,79 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useState } from 'react';
+import Loader from './Loader';
 
 const Footer = () => {
+
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState("");
+  const [error, setError] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    setLoading(true)
+
+    try{
+      const formdata = new FormData();
+      formdata.append("email", email);
+      formdata.append("message", message);
+
+      const response = await axios.post("https://jmmwikali.alwaysdata.net/api/contact_us", formdata);
+      setLoading(false);
+
+      setSuccess(response.data.message)
+
+      setTimeout(() => setSuccess(""), 5000)
+
+      setEmail("");
+      setMessage("");
+      
+    }
+    catch(error){
+      setLoading(false)
+      setError("Oops! Seems like something went wrong. Please try again later...")
+      setTimeout(() => setError(""), 5000)
+
+    }
+  }
+
   return (
     <>
       <div className='row footer'>
         <div className="col-md-6">
           <h3>Customer Support</h3>
-          <input
+
+          {loading && <Loader />}
+          <h4 className="text-success">{success}</h4>
+          <h4 className="text-danger">{error}</h4>
+          
+          <form onSubmit={handleSubmit}>
+            <input
             type="email"
             placeholder='Enter your email'
             className='form-control'
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             required />
           <br />
+
+          {/* {email} */}
+
           <textarea
             placeholder='How can we help you rest better?'
             className='form-control'
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
             required></textarea>
-          <a href="mailto:jmmwikali936@gmail.com" className='btn btn-primary mt-4'>Send Message</a>
+
+            {/* {message} */}
+          
+          <input type="submit" 
+          value="Send Message"
+          className='btn btn-primary mt-4' />
+          </form>
         </div>
 
         <div className="col-md-6 mt-5">
